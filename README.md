@@ -68,7 +68,7 @@ Detection classes: pedestrian, vehicle, cone, barrel, debris
 Segmentation classes: drivable_area, obstacle, vegetation, sky
 
 Export dataset in YOLOv8 format:
-
+```text
 dataset/
 ├── images/
 │   ├── train/
@@ -76,7 +76,7 @@ dataset/
 ├── labels/
 │   ├── train/
 │   └── val/
-
+```
 🧠 YOLOv8 Training
 from ultralytics import YOLO
 
@@ -138,3 +138,36 @@ yolov8_node	Performs YOLOv8 object detection and publishes /perception/detection
 segmentation_node	Performs semantic segmentation and publishes /perception/segmentation_mask
 fusion_node	Combines detections and segmentation → /perception/occupancy_grid
 nav2	Path planning and control using perception-driven costmaps
+
+📊 Evaluation Metrics
+Category	Metric	Target
+Perception	mAP (YOLO), IoU (Segmentation)	>85%
+Navigation	Collision-free success rate	>90%
+Performance	Real-time FPS on Jetson	>15 FPS
+💡 Future Improvements
+
+Add LiDAR and visual SLAM fusion
+
+Integrate terrain classification (mud, gravel)
+
+Add predictive obstacle motion (Kalman / LSTM)
+
+Multi-camera 360° coverage
+
+Edge optimization using pruning/quantization
+
+🧩 References
+
+Ultralytics YOLOv8
+
+ROS2 Nav2 Documentation
+
+Clearpath Husky A200
+
+CVAT Annotation Tool
+
+
+🧑‍💻 Author
+
+Arashdeep Singh
+Robotics Engineer | ROS2 • Perception • Navigation
