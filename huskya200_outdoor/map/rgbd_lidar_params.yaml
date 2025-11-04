@@ -1,0 +1,7 @@
+# warehouse_robot/config/rgbd_lidar_params.yaml
+Rtabmap:
+  Mem/IncrementalMemory: "true"
+  RGBD/OptimizeFromGraphEnd: "false"
+  Reg/Force3DoF: "true"  # 2D mapping constraint
+  Grid/FromDepth: "false"
+  

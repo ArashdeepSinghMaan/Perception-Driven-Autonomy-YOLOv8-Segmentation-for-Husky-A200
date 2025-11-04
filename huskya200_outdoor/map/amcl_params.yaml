@@ -1,0 +1,15 @@
+amcl:
+  ros__parameters:
+    use_sim_time: false
+    laser_model_type: “likelihood_field”      # or beam
+    min_particles: 500
+    max_particles: 2000
+    odom_frame_id: “odom”
+    base_frame_id: “base_link”
+    scan_topic: “/scan”
+    map_frame_id: “map”
+    update_min_d: 0.2
+    update_min_a: 0.2
+    resample_interval: 1
+    recovery_alpha_fast: 0.0
+    recovery_alpha_slow: 0.0
