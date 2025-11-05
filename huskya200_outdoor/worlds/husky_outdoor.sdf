@@ -1,4 +1,3 @@
-<?xml version='1.0'?>
 <sdf version='1.10'>
   <world name='empty'>
     <physics name='1ms' type='ignored'>
@@ -10,25 +9,160 @@
     <plugin name='gz::sim::systems::UserCommands' filename='gz-sim-user-commands-system'/>
     <plugin name='gz::sim::systems::SceneBroadcaster' filename='gz-sim-scene-broadcaster-system'/>
     <plugin name='gz::sim::systems::Contact' filename='gz-sim-contact-system'/>
-    <plugin
-  filename="gz-sim-altimeter-system"
-  name="gz::sim::systems::Altimeter">
-</plugin>
-    <plugin filename="gz-sim-imu-system" name="gz::sim::systems::Imu"/>
-     <plugin name='gz::sim::systems::NavSat' filename='gz-sim-navsat-system'/>
-     <plugin
-      filename="gz-sim-sensors-system"
-      name="gz::sim::systems::Sensors">
+    <plugin name='gz::sim::systems::Altimeter' filename='gz-sim-altimeter-system'/>
+    <plugin name='gz::sim::systems::Imu' filename='gz-sim-imu-system'/>
+    <plugin name='gz::sim::systems::NavSat' filename='gz-sim-navsat-system'/>
+    <plugin name='gz::sim::systems::Sensors' filename='gz-sim-sensors-system'>
       <render_engine>ogre2</render_engine>
     </plugin>
-
-
-
-
-<!-- GPS Plugin -->
-
-<!-- LIDAR Plugin -->
-<spherical_coordinates>
+    <actor name='actor'>
+      <skin>
+        <filename>https://fuel.gazebosim.org/1.0/chapulina/models/walking actor/2/files/meshes/walk.dae</filename>
+        <scale>1</scale>
+      </skin>
+      <pose>1 3 0 0 0 0</pose>
+      <animation name='walking'>
+        <filename>https://fuel.gazebosim.org/1.0/chapulina/models/walking actor/2/files/meshes/walk.dae</filename>
+        <scale>1</scale>
+        <interpolate_x>true</interpolate_x>
+      </animation>
+      <script>
+        <loop>true</loop>
+        <delay_start>0</delay_start>
+        <auto_start>true</auto_start>
+        <trajectory id='0' type='walking'>
+          <waypoint>
+            <time>0</time>
+            <pose>0 1 0 0 0 0</pose>
+          </waypoint>
+          <waypoint>
+            <time>0.5</time>
+            <pose>0.19509000000000001 0.98078500000000002 0 0 0 -0.19635000000000002</pose>
+          </waypoint>
+          <waypoint>
+            <time>1</time>
+            <pose>0.382683 0.92388000000000003 0 0 0 -0.39269900000000002</pose>
+          </waypoint>
+          <waypoint>
+            <time>1.5</time>
+            <pose>0.55557000000000001 0.83147000000000004 0 0 0 -0.58904900000000004</pose>
+          </waypoint>
+          <waypoint>
+            <time>2</time>
+            <pose>0.70710700000000004 0.70710700000000004 0 0 0 -0.78539799999999993</pose>
+          </waypoint>
+          <waypoint>
+            <time>2.5</time>
+            <pose>0.83147000000000004 0.55557000000000001 0 0 0 -0.98174799999999995</pose>
+          </waypoint>
+          <waypoint>
+            <time>3</time>
+            <pose>0.92388000000000003 0.382683 0 0 0 -1.1780999999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>3.5</time>
+            <pose>0.98078500000000002 0.19509000000000001 0 0 0 -1.3744499999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>4</time>
+            <pose>1 0 0 0 0 -1.5708</pose>
+          </waypoint>
+          <waypoint>
+            <time>4.5</time>
+            <pose>0.98078500000000002 -0.19509000000000001 0 0 0 -1.7671499999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>5</time>
+            <pose>0.92388000000000003 -0.382683 0 0 0 -1.9635000000000002</pose>
+          </waypoint>
+          <waypoint>
+            <time>5.5</time>
+            <pose>0.83147000000000004 -0.55557000000000001 0 0 0 -2.15984</pose>
+          </waypoint>
+          <waypoint>
+            <time>6</time>
+            <pose>0.70710700000000004 -0.70710700000000004 0 0 0 -2.3561899999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>6.5</time>
+            <pose>0.55557000000000001 -0.83147000000000004 0 0 0 -2.55254</pose>
+          </waypoint>
+          <waypoint>
+            <time>7.5</time>
+            <pose>0.382683 -0.92388000000000003 0 0 0 -2.7488899999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>8.5</time>
+            <pose>0.19509000000000001 -0.98078500000000002 0 0 0 -2.9452400000000001</pose>
+          </waypoint>
+          <waypoint>
+            <time>9.5</time>
+            <pose>0 -1 0 0 0 -3.1415899999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>10.5</time>
+            <pose>-0.19509000000000001 -0.98078500000000002 0 0 0 2.9452449999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>11.5</time>
+            <pose>-0.382683 -0.92388000000000003 0 0 0 2.7488950000000001</pose>
+          </waypoint>
+          <waypoint>
+            <time>12</time>
+            <pose>-0.55557000000000001 -0.83147000000000004 0 0 0 2.5525449999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>12.5</time>
+            <pose>-0.70710700000000004 -0.70710700000000004 0 0 0 2.356195</pose>
+          </waypoint>
+          <waypoint>
+            <time>13</time>
+            <pose>-0.83147000000000004 -0.55557000000000001 0 0 0 2.1598449999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>13.5</time>
+            <pose>-0.92388000000000003 -0.382683 0 0 0 1.963495</pose>
+          </waypoint>
+          <waypoint>
+            <time>14</time>
+            <pose>-0.98078500000000002 -0.19509000000000001 0 0 0 1.7671449999999997</pose>
+          </waypoint>
+          <waypoint>
+            <time>14.5</time>
+            <pose>-1 0 0 0 0 1.5707949999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>15</time>
+            <pose>-0.98078500000000002 0.19509000000000001 0 0 0 1.3744449999999999</pose>
+          </waypoint>
+          <waypoint>
+            <time>15.5</time>
+            <pose>-0.92388000000000003 0.382683 0 0 0 1.1780950000000001</pose>
+          </waypoint>
+          <waypoint>
+            <time>16</time>
+            <pose>-0.83147000000000004 0.55557000000000001 0 0 0 0.98174499999999998</pose>
+          </waypoint>
+          <waypoint>
+            <time>16.5</time>
+            <pose>-0.70710700000000004 0.70710700000000004 0 0 0 0.78539499999999995</pose>
+          </waypoint>
+          <waypoint>
+            <time>17</time>
+            <pose>-0.55557000000000001 0.83147000000000004 0 0 0 0.58904499999999993</pose>
+          </waypoint>
+          <waypoint>
+            <time>17.5</time>
+            <pose>-0.382683 0.92388000000000003 0 0 0 0.39269500000000002</pose>
+          </waypoint>
+          <waypoint>
+            <time>18</time>
+            <pose>-0.19509000000000001 0.98078500000000002 0 0 0 0.19634499999999999</pose>
+          </waypoint>
+        </trajectory>
+      </script>
+    </actor>
+    <spherical_coordinates>
       <surface_model>EARTH_WGS84</surface_model>
       <world_frame_orientation>ENU</world_frame_orientation>
       <latitude_deg>42.35821841111111</latitude_deg>
@@ -36,7 +170,6 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-
     <gravity>0 0 -9.8000000000000007</gravity>
     <magnetic_field>5.5644999999999998e-06 2.2875799999999999e-05 -4.2388400000000002e-05</magnetic_field>
     <atmosphere type='adiabatic'/>
@@ -45,64 +178,116 @@
       <background>0.699999988 0.699999988 0.699999988 1</background>
       <shadows>true</shadows>
     </scene>
-<include>
-<uri>
-https://fuel.gazebosim.org/1.0/hujp/models/Campus
-</uri>
-</include>
-<!--
-    <model name='ground_plane'>
-      <static>true</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <surface>
-            <friction>
-              <ode/>
-            </friction>
-            <bounce/>
-            <contact/>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <plane>
-              <normal>0 0 1</normal>
-              <size>100 100</size>
-            </plane>
-          </geometry>
-          <material>
-            <ambient>0.800000012 0.800000012 0.800000012 1</ambient>
-            <diffuse>0.800000012 0.800000012 0.800000012 1</diffuse>
-            <specular>0.800000012 0.800000012 0.800000012 1</specular>
-          </material>
-        </visual>
-        <pose>0 0 0 0 0 0</pose>
-        <inertial>
-          <pose>0 0 0 0 0 0</pose>
-          <mass>1</mass>
-          <inertia>
-            <ixx>1</ixx>
-            <ixy>0</ixy>
-            <ixz>0</ixz>
-            <iyy>1</iyy>
-            <iyz>0</iyz>
-            <izz>1</izz>
-          </inertia>
-        </inertial>
-        <enable_wind>false</enable_wind>
-      </link>
-      <pose>0 0 0 0 0 0</pose>
-      <self_collide>false</self_collide>
-    </model>
-    -->
-
-
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback</uri>
+      <name>hatchback</name>
+      <pose>36.597755432128906 2.7246863842010498 0 0 0 1.0736100094334691</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Prius Hybrid</uri>
+      <name>prius_hybrid</name>
+      <pose>3 1 0 0 0 -0.79453837196329002</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback red copy</uri>
+      <name>hatchback_red</name>
+      <pose>70.224411010742188 39.100620269775391 0 0 0 0.47209300922931935</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/GoogleResearch/models/SpiderMan_Titan_Hero_12Inch_Action_Figure_5Hnn4mtkFsP</uri>
+      <name>SpiderMan_Titan_Hero_12Inch_Action_Figure_5Hnn4mtkFsP</name>
+      <pose>0 2 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree</name>
+      <pose>13.156583786010742 -8.7440099716186523 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Oak tree</uri>
+      <name>Oak tree</name>
+      <pose>40.054401397705078 -9.2776594161987305 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/hujp/models/Campus</uri>
+      <name>Campus</name>
+      <pose>-1.3942848443984985 -2.509390115737915 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Hatchback</uri>
+      <name>hatchback_1</name>
+      <pose>51.968866341763821 9.7005124092102051 0 0 0 1.0736100094334691</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Oak tree</uri>
+      <name>Oak tree_1</name>
+      <pose>23.592020495150695 -10.064784694313055 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1</name>
+      <pose>19.087433954470185 -17.038958535868861 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1_1</name>
+      <pose>15.720709109940117 -21.653390974717183 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1_2</name>
+      <pose>49.142326008763114 10.964470431356748 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Prius Hybrid</uri>
+      <name>prius_hybrid_1</name>
+      <pose>47.986113309490179 13.466204855003049 0 0 0 -0.79453797219810385</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Casual female</uri>
+      <name>casual_female_1</name>
+      <pose>40.008717030640241 12.167979614787189 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Casual female</uri>
+      <name>casual_female_2</name>
+      <pose>31.847088420107788 -16.648715176148709 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Casual female</uri>
+      <name>casual_female_2_1</name>
+      <pose>20.317054563455631 -20.228669523666802 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Casual female</uri>
+      <name>casual_female_2_1_1</name>
+      <pose>52.662225558450992 34.62933267020054 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Oak tree</uri>
+      <name>Oak tree_1_1</name>
+      <pose>61.147861275434018 43.341804650051031 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Oak tree</uri>
+      <name>Oak tree_1_2</name>
+      <pose>67.558681484952956 20.9297010014497 0 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1_3</name>
+      <pose>34.211293672074383 36.428858084486386 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1_4</name>
+      <pose>32.121910719594162 43.036072140849427 -0.14150699973106384 0 0 0</pose>
+    </include>
+    <include>
+      <uri>https://fuel.gazebosim.org/1.0/OpenRobotics/models/Pine Tree</uri>
+      <name>Pine Tree_1_5</name>
+      <pose>30.60593045234365 50.502439083634883 -0.14150699973106384 0 0 0</pose>
+    </include>
     <light name='sun' type='directional'>
       <pose>0 0 10 0 0 0</pose>
       <cast_shadows>true</cast_shadows>

@@ -62,7 +62,7 @@ def generate_launch_description():
         arguments=[
             '-topic', 'robot_description',
             '-name',  'husky',
-            '-x', '33.13', '-y', '-4.78', '-z', '0.5'
+            '-x', '1.40', '-y', '2.50', '-z', '0.5'
         ],
         output='screen'
     )
