@@ -1,29 +1,29 @@
-🚘 YOLOv8 + DeepLabV3 Based Terrain-Aware Segmentation and Perception System for Autonomous Robot (Husky A200)
+# 🚘 YOLOv8 + DeepLabV3 Based Terrain-Aware Segmentation and Perception System for Autonomous Robot (Husky A200)
 
-A fully integrated computer vision + ROS2 perception pipeline combining YOLOv8 object detection/instance segmentation and DeepLabV3 semantic segmentation to enable terrain-aware autonomous navigation on the Clearpath Husky A200 robot.
+A fully integrated **computer vision + ROS2 perception pipeline** combining **YOLOv8 object detection/instance segmentation** and **DeepLabV3 semantic segmentation** to enable **terrain-aware autonomous navigation** on the Clearpath **Husky A200** robot.
 
-This system is designed for real-time outdoor autonomy, including drivable-terrain detection, dynamic obstacle avoidance, fused occupancy grid generation, and Nav2-based motion planning.
-The framework supports deployment on Jetson hardware, Gazebo simulation, and ROS2 Jazzy.
+This system enables **real-time outdoor perception**, including drivable-terrain detection, dynamic obstacle avoidance, fused occupancy grid generation, and Nav2-based autonomous motion planning.  
+The framework supports deployment on **Jetson hardware**, **Gazebo simulation**, and **ROS2 Jazzy**.
 
-Key Capabilities
+---
 
-Multi-class object detection using YOLOv8
+## ✅ Key Capabilities
 
-Dense semantic segmentation using DeepLabV3
+- Multi-class object detection using **YOLOv8**
+- Dense semantic segmentation using **DeepLabV3**
+- Terrain classification: drivable area, vegetation, sky, obstacles
+- Dynamic obstacle detection: humans, vehicles, cones, barrels, debris
+- Occupancy grid fusion for navigation
+- Real-time deployment using **TensorRT**
+- Full integration with **Nav2** for autonomous planning and control
 
-Terrain classification: drivable area, vegetation, obstacles, sky
+---
 
-Dynamic obstacle detection: humans, vehicles, cones, debris
+# 1. System Architecture
 
-Occupancy grid fusion for navigation
-
-Real-time deployment on embedded GPU (TensorRT)
-
-Full integration with Nav2 for autonomous navigation
-
-1. System Architectue
-2.                  +-----------------------------+
-                 |   Husky RGB Camera Feed     |
+```
+                 +-----------------------------+
+                 |     Husky RGB Camera Feed   |
                  +-----------------------------+
                                  |
                      +-----------------------+
@@ -44,21 +44,26 @@ Full integration with Nav2 for autonomous navigation
                     |      Fused Occupancy Grid     |
                     +-------------------------------+
                                  |
-                       +----------------------+
-                       |     Nav2 Stack       |
-                       +----------------------+
-                           Global + Local Planner
-                           Controller Server
-                           Behavior Tree Navigator
-2. Project Structure
-   yolo_deeplab_husky/
+                       +----------------------------+
+                       |        Nav2 Stack          |
+                       +----------------------------+
+                        Global Planner + Local Planner
+                        Controller Server + BT Navigator
+```
+
+---
+
+# 2. Project Structure
+
+```
+yolo_deeplab_husky/
 ├── dataset/
 │   ├── raw/                
 │   ├── annotations/        
 │   └── scripts/            
 ├── models/
 │   ├── yolov8/            
-│   ├── deeplabv3/          
+│   └── deeplabv3/          
 ├── ros2_ws/
 │   ├── src/
 │   │   ├── perception_nodes/
@@ -67,44 +72,44 @@ Full integration with Nav2 for autonomous navigation
 │   └── config/
 ├── notebooks/
 └── docs/
-3. Dataset Preparation
-3.1 Data Collection
+```
 
-Record camera images from Husky simulation or real hardware:
+---
 
+# 3. Dataset Preparation
+
+## 3.1 Data Collection
+
+Collect real or simulated Husky camera data:
+
+```bash
 ros2 bag record /camera/image_raw
+```
 
-3.2 Annotation Tools
+## 3.2 Annotation Tools
 
-CVAT
+- **CVAT**
+- **Roboflow**
+- **Label Studio**
 
-Roboflow
+### Detection Classes (YOLO)
 
-LabelStudio
+- pedestrian  
+- vehicle  
+- cone  
+- barrel  
+- debris  
 
-Detection Classes (YOLO)
+### Segmentation Classes (DeepLabV3)
 
-pedestrian
+- drivable_area  
+- vegetation  
+- sky  
+- obstacle  
 
-vehicle
+## 3.3 Dataset Format (YOLOv8 + Semantic Segmentation)
 
-cone
-
-barrel
-
-debris
-
-Segmentation Classes (DeepLabV3)
-
-drivable_area
-
-vegetation
-
-sky
-
-obstacle
-
-3.3 Dataset Format
+```
 dataset/
 ├── images/
 │   ├── train/
@@ -113,9 +118,17 @@ dataset/
 │   ├── train/
 │   └── val/
 └── seg_masks/
+```
 
-4. Model Training
-4.1 YOLOv8 (Detection + Segmentation)
+---
+
+# 4. Model Training
+
+---
+
+## 4.1 YOLOv8 (Detection + Instance Segmentation)
+
+```python
 from ultralytics import YOLO
 
 model = YOLO("yolov8x-seg.pt")
@@ -126,87 +139,166 @@ model.train(
     batch=16,
     name="husky_yolov8_seg"
 )
+```
 
-✅ Template: YOLOv8 Training Results
-Metric	Value
-mAP@0.5	XX.XX
-mAP@0.5:0.95	XX.XX
-Segmentation mAP	XX.XX
-Precision	XX.XX
-Recall	XX.XX
-F1 Score	XX.XX
-FPS on Jetson (INT8)	XX FPS
-Model Size	XX MB
-Training Duration	XX hours
+### ✅ YOLOv8 Training Results (Template)
 
-Include (Add Images):
+| Metric | Value |
+|--------|--------|
+| mAP@0.5 | XX.XX |
+| mAP@0.5:0.95 | XX.XX |
+| Segmentation mAP | XX.XX |
+| Precision | XX.XX |
+| Recall | XX.XX |
+| F1 Score | XX.XX |
+| FPS on Jetson (INT8) | XX FPS |
+| Model Size | XX MB |
+| Training Duration | XX hours |
 
-Bounding box outputs
+**Visual Outputs (Recommended):**
+- Detection samples  
+- Segmentation mask overlays  
+- Confusion matrix  
+- PR curves  
 
-Segmentation mask overlays
+---
 
-Confusion matrix
+## 4.2 DeepLabV3 Semantic Segmentation
 
-PR curves
+### Model Definition
 
-4.2 DeepLabV3 Semantic Segmentation
-
-Using TorchVision DeepLabV3 (ResNet-50 / ResNet-101):
-
+```python
 from torchvision import models
 import torch.nn as nn
 
 model = models.segmentation.deeplabv3_resnet50(pretrained=True)
 model.classifier[4] = nn.Conv2d(256, NUM_CLASSES, kernel_size=1)
+```
 
+### Training Setup
 
-Train using:
+- Loss: CrossEntropyLoss (+ optional Dice Loss)
+- Optimizer: Adam or SGD
+- Metrics:
+  - IoU  
+  - mIoU  
+  - Pixel Accuracy  
 
-CrossEntropyLoss
+### ✅ DeepLabV3 Training Results (Template)
 
-Dice Loss (optional)
+| Metric | Value |
+|--------|--------|
+| IoU (drivable area) | XX.XX |
+| IoU (vegetation) | XX.XX |
+| IoU (sky) | XX.XX |
+| IoU (obstacle) | XX.XX |
+| Mean IoU (mIoU) | XX.XX |
+| Pixel Accuracy | XX.XX% |
+| FPS Jetson (FP16) | XX FPS |
+| Model Size | XX MB |
 
-Adam / SGD optimizer
+### Visual Outputs
 
-IoU & mIoU metrics
+- Color-coded segmentation results  
+- Prediction vs ground truth comparison  
+- Failure case examples  
 
-✅ Template: DeepLabV3 Training Results
-Metric	Value
-IoU (drivable area)	XX.XX
-IoU (vegetation)	XX.XX
-IoU (sky)	XX.XX
-IoU (obstacle)	XX.XX
-Mean IoU (mIoU)	XX.XX
-Pixel Accuracy	XX.XX%
-FPS Jetson (FP16)	XX FPS
-Model Size	XX MB
+---
 
-Include (Add Images):
+# 5. Model Optimization for Deployment
 
-Color-coded segmentation overlays
+## 5.1 Export YOLOv8 → ONNX
 
-Prediction vs Ground Truth comparisons
+```bash
+yolo export model=runs/segment/husky_yolov8_seg/weights/best.pt format=onnx
+```
 
-Failure cases
- References
+## 5.2 Convert YOLOv8 ONNX → TensorRT
 
-Ultralytics YOLOv8
+```bash
+trtexec --onnx=model.onnx --saveEngine=model.trt
+```
 
+## 5.3 DeepLabV3 Optimization
 
-TorchVision DeepLabV3
+- TorchScript Export  
+- ONNX Export  
+- TensorRT FP16 / INT8 Conversion  
 
+---
 
-ROS2 Nav2 Documentation
+# 6. ROS2 Implementation
 
+## 6.1 Dependencies
 
-Clearpath Husky A200
+```bash
+sudo apt install ros-jazzy-cv-bridge \
+                 ros-jazzy-vision-msgs \
+                 ros-jazzy-nav2-bringup
+```
 
+## 6.2 ROS2 Node Graph
 
-CVAT Annotation Platform
+| Node | Function |
+|------|----------|
+| `yolov8_node` | YOLOv8 inference → `/perception/detections` |
+| `deeplab_node` | DeepLabV3 segmentation → `/perception/segmentation_mask` |
+| `fusion_node` | Fuses YOLO + segmentation → occupancy grid |
+| `nav2` | Navigation planning + control |
 
+---
 
+# 7. Navigation Integration (Nav2)
 
- Author
-Arashdeep Singh
-Robotics Engineer — Perception | ROS2 | Navigation
+## 7.1 Costmap Interpretation
 
+| Perception Class | Costmap Value |
+|------------------|----------------|
+| drivable area | free space |
+| vegetation | soft obstacle |
+| obstacles / debris | lethal |
+| humans / cars | dynamic inflated |
+
+## 7.2 Nav2 Modules Used
+
+- Global Planner (NavFn, Smac)
+- Local Planner (DWB or Regulated Pure Pursuit)
+- Controller Server
+- Behavior Tree Navigator
+
+---
+
+# 8. Evaluation Framework
+
+## 8.1 Perception Metrics
+
+| Category | Metric | Target |
+|----------|--------|--------|
+| YOLOv8 | mAP@0.5 | > 85% |
+| DeepLabV3 | mIoU | > 80% |
+| Runtime | FPS | ≥ 15 FPS |
+
+## 8.2 Navigation Metrics
+
+| Scenario | Target |
+|----------|--------|
+| Straight Navigation | > 95% Success |
+| Cluttered Navigation | > 90% Success |
+| Dynamic Obstacle Avoidance | > 85% Success |
+
+---
+
+# 9. References
+
+- Ultralytics YOLOv8  
+- TorchVision DeepLabV3  
+- ROS2 Nav2 Documentation  
+- Clearpath Husky A200  
+- CVAT Annotation Tool  
+
+---
+
+# 10. Author
+
+**Arashdeep Singh**  
+Robotics Engineer — ROS2 • Perception • Autonomous Navigation
